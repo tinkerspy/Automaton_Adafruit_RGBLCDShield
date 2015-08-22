@@ -53,7 +53,7 @@ void ATM_CLASSNAME::menu_action( int id )
 {
     switch ( id ) {
         case UPD :
-            if ( !updateDisplay( 1 ) ) sleeping = 1;
+            if ( updateDisplay( 1 ) == 0 ) sleep = 1;
             return;
         case ACT11L :
             if ( pinChange( 3 ) ) printXY(  5, 1, digitalRead( 3 ) ? "+" : " " );
@@ -66,9 +66,9 @@ void ATM_CLASSNAME::menu_action( int id )
             printXY(  9, 1, digitalRead( 4 ) ? "+" : " " );
             printXY( 13, 1, digitalRead( 5 ) ? "+" : " " );
             return;
-        case ACT21 : printXY(  8, 1, led1.state() == led1.IDLE ? "Off" : "On" ); return;
-        case ACT31 : printXY(  8, 1, led2.state() == led2.IDLE ? "Off" : "On" ); return;
-        case ACT41 : printXY(  8, 1, led3.state() == led3.IDLE ? "Off" : "On" ); return;
+        case ACT21 : printXY( 8, 1, led1.state() == led1.IDLE ? "Off" : "On" ); return;
+        case ACT31 : printXY( 8, 1, led2.state() == led2.IDLE ? "Off" : "On" ); return;
+        case ACT41 : printXY( 8, 1, led3.state() == led3.IDLE ? "Off" : "On" ); return;
         case ACT211 : led1.toggle( led1.IDLE, led1.START ); return;
         case ACT311 : led2.toggle( led2.IDLE, led2.START ); return;
         case ACT411 : led3.toggle( led3.IDLE, led3.START ); return;    
