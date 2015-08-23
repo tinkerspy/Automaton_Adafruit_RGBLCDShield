@@ -26,7 +26,7 @@ class ATM_CLASSNAME : public Machine {
   Adafruit_RGBLCDShield lcd;
   const char *menu_opts;
   int start_action, end_action, top_offset, top_cnt;
-  display_t ist, soll = { 
+  display_t ist, soll = { // German for 'what is' (ist) and 'what should be' (soll)
 	{ ' ', ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ' },
     { ' ', ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ' } };
  
@@ -34,7 +34,8 @@ class ATM_CLASSNAME : public Machine {
   int event( int id );
   void action( int id );
   void printXY( int x, int y, const char s[] );
-  int updateDisplay( int max );
+  int updateDisplay( int max_updates );
+  int updateDisplay( void );
   virtual void menu_action( int id );
 };
 

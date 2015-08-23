@@ -20,21 +20,26 @@ int ATM_CLASSNAME::event( int id )
   return signalRead( id ); // Only possible because EVT_XXX == SIG_XXX (see .h)
 }
 
-// Double buffering: write cnt changes from the 'soll' buffer to the display and the 'ist' buffer
-int ATM_CLASSNAME::updateDisplay( int max ) 
+// Double buffering: write 'max' changes from the 'soll' buffer to both the lcd and the 'ist' buffer
+int ATM_CLASSNAME::updateDisplay( int max_updates ) 
 {
-	uint8_t i = 0;
+	uint8_t updates = 0;
 	for ( uint8_t y = 0; y < 2; y++ ) {
 		for ( uint8_t x = 0; x < 16; x++ ) {
 			if ( ist[y][x] != soll[y][x] ) {
 				lcd.setCursor( x, y );
 				lcd.print( soll[y][x] );
 				ist[y][x] = soll[y][x];
-				if ( ++i >= max ) return i;
+				if ( ++updates >= max_updates ) return updates;
 			}
 		}
 	}
-	return i;
+	return updates;
+}
+
+int ATM_CLASSNAME::updateDisplay( void ) 
+{
+	updateDisplay( 32 );
 }
 
 void ATM_CLASSNAME::printXY( int x, int y, const char s[] ) 

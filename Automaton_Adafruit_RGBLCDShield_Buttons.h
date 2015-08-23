@@ -23,7 +23,7 @@ class ATM_CLASSNAME : public Machine {
   Adafruit_RGBLCDShield lcd;
   uint8_t lcd_buttons;
   void (*callback)( int press ) = 0;
-  atm_timer timer_delay, timer_repeat;
+  atm_milli_timer timer_delay, timer_repeat;
   
   // Prototypes for your methods, minimum: begin() & io()
   ATM_CLASSNAME & begin(  presscb_t event_callback );
