@@ -17,9 +17,9 @@ void buttonHandler( int press ) {
 
 void setup() {
   // Initialize the machines
-  led1.begin( 3 ).duration( 50 ).state( led1.START );
-  led2.begin( 4 ).duration( 50 ).state( led2.START );
-  led3.begin( 5 ).duration( 50 ).state( led3.START );
+  led1.begin( 3 ).blink( 50 ).state( led1.START );
+  led2.begin( 4 ).blink( 50 ).state( led2.START );
+  led3.begin( 5 ).blink( 50 ).state( led3.START );
   lcd_display.begin( );
   lcd_buttons.begin( buttonHandler );
 
