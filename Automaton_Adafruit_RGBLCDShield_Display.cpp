@@ -39,12 +39,12 @@ int ATM_CLASSNAME::updateDisplay( int max_updates )
 
 int ATM_CLASSNAME::updateDisplay( void ) 
 {
-	updateDisplay( 32 );
+	return updateDisplay( 32 );
 }
 
 void ATM_CLASSNAME::printXY( int x, int y, const char s[] ) 
 {	
-	for ( int i = 0; i < strlen( s ); i++ ) {
+	for ( uint8_t i = 0; i < strlen( s ); i++ ) {
 		soll[y][x++] = s[i];
 	}
 }
