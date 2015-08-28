@@ -17,13 +17,13 @@ class ATM_CLASSNAME : public Machine {
   
   // Your state, event & action names, customize this 
   enum { IDLE, PRESS, REPEAT } STATES; // In state table row order
-  enum { EVT_BTN, EVT_RLS, EVT_DELAY, EVT_REPEAT, ELSE } EVENTS;
+  enum { EVT_SAMPLE, EVT_BTN, EVT_RLS, EVT_DELAY, EVT_REPEAT, ELSE } EVENTS;
   enum { ACT_CHECK, ACT_PRESS } ACTIONS; // Custom event & io constants
 
   Adafruit_RGBLCDShield lcd;
   uint8_t lcd_buttons;
   void (*callback)( int press ) = 0;
-  atm_milli_timer timer_delay, timer_repeat;
+  atm_milli_timer timer_delay, timer_repeat, timer_sample;
   
   // Prototypes for your methods, minimum: begin() & io()
   ATM_CLASSNAME & begin(  presscb_t event_callback );
