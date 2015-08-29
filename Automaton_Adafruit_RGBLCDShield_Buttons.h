@@ -24,9 +24,13 @@ class ATM_CLASSNAME : public Machine {
   uint8_t lcd_buttons;
   void (*callback)( int press ) = 0;
   atm_milli_timer timer_delay, timer_repeat, timer_sample;
+  Machine * display;
   
   // Prototypes for your methods, minimum: begin() & io()
-  ATM_CLASSNAME & begin(  presscb_t event_callback );
+  ATM_CLASSNAME & begin();
+  ATM_CLASSNAME & begin( presscb_t event_callback );
+  ATM_CLASSNAME & begin( const char label[] );
+  ATM_CLASSNAME & begin( Machine & machine );
   int event( int id );
   void action( int id );
 };

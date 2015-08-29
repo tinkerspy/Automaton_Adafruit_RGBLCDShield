@@ -1,7 +1,7 @@
 #include <Automaton.h>
 #include "Automaton_Adafruit_RGBLCDShield_Buttons.h"
 
-ATM_CLASSNAME & ATM_CLASSNAME::begin( presscb_t event_callback )
+ATM_CLASSNAME & ATM_CLASSNAME::begin()
 { 
   const static state_t state_table[] PROGMEM = {
   /*            ON_ENTER     ON_LOOP  ON_EXIT  EVT_SAMPLE  EVT_BTN   EVT_RLS  EVT_DELAY  EVT_REPEAT  ELSE */
@@ -12,10 +12,30 @@ ATM_CLASSNAME & ATM_CLASSNAME::begin( presscb_t event_callback )
   table( state_table, ELSE );
   lcd = Adafruit_RGBLCDShield();
   lcd.begin(16, 2);
-  callback = event_callback;
   set(  timer_delay, 500 );
   set( timer_repeat, 100 );  
   set( timer_sample,  50 );
+  return *this;
+}
+
+ATM_CLASSNAME & ATM_CLASSNAME::begin( presscb_t event_callback ) 
+{
+  callback = event_callback;
+  begin();
+  return *this;
+}
+
+ATM_CLASSNAME & ATM_CLASSNAME::begin( const char label[] )
+{
+  display = factory->find( label );
+  begin();
+  return *this;
+}
+
+ATM_CLASSNAME & ATM_CLASSNAME::begin( Machine & machine )
+{
+  display = &machine;
+  begin();
   return *this;
 }
 
@@ -43,7 +63,8 @@ void ATM_CLASSNAME::action( int id )
 		lcd_buttons = lcd.readButtons();
 		return;
 	  case ACT_PRESS :
-		(*callback)( lcd_buttons );
+        if ( display ) display->signalMap( lcd_buttons );
+		if ( callback ) (*callback)( lcd_buttons );
 		return;
   }
 }
