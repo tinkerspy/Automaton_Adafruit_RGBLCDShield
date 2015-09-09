@@ -36,7 +36,7 @@ class ATM_CLASSNAME : public Machine {
   void printXY( int x, int y, const char s[] );
   int updateDisplay( int max_updates );
   int updateDisplay( void );
-  virtual void menu_action( int id );
+  virtual void menu_action( int id ) = 0; // Pure virtual method -> makes this an abstract class
 };
 
 #endif

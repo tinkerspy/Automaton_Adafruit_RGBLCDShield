@@ -13,7 +13,7 @@ ATM_CLASSNAME & ATM_CLASSNAME::menu( const char def[], int act_start, int act_en
   return *this;
 }
 
-void ATM_CLASSNAME::menu_action( int id ) { };
+// void ATM_CLASSNAME::menu_action( int id ) { };
 
 int ATM_CLASSNAME::event( int id ) 
 {
