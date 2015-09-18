@@ -16,7 +16,7 @@ Automaton_Adafruit_RGBLCDShield_Display & Automaton_Adafruit_RGBLCDShield_Displa
 
 int Automaton_Adafruit_RGBLCDShield_Display::event( int id ) 
 {
-  return msgRead( id ); // Only possible because EVT_XXX == SIG_XXX (see .h)
+  return msgRead( id ); // Only possible because EVT_XXX == MSG_XXX (see .h)
 }
 
 // Double buffering: write 'max' changes from the 'soll' buffer to both the lcd and the 'ist' buffer
