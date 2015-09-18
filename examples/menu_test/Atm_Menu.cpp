@@ -4,7 +4,7 @@
 
 extern Atm_led led1, led2, led3;
 
-ATM_CLASSNAME & ATM_CLASSNAME::begin( void )
+Atm_Menu & Atm_Menu::begin( void )
 { 
     const static state_t state_table[] PROGMEM = {
     /*             ON_ENTER     ON_LOOP  ON_EXIT  EVT_SELECT  EVT_RIGHT  EVT_DOWN    EVT_UP   EVT_LEFT    ELSE */
@@ -49,7 +49,7 @@ ATM_CLASSNAME & ATM_CLASSNAME::begin( void )
     return *this;
 }
 
-void ATM_CLASSNAME::menu_action( int id ) 
+void Atm_Menu::menu_action( int id ) 
 {
     switch ( id ) {
         case UPD :
