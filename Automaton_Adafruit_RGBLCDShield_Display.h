@@ -16,9 +16,9 @@ class Automaton_Adafruit_RGBLCDShield_Display : public Machine {
   public:
   Automaton_Adafruit_RGBLCDShield_Display( void ) : Machine() { class_label = "LCDIS"; };
   
-  // Event and signal names ( EVT_XXX == SIG_XXX allows for a very simple one line event() handler! )
+  // Event and message names ( EVT_XXX == MSG_XXX allows for a very simple one line event() handler! )
   // Also matches the Adafruit button bitmap, so that BUTTON_XXX lines up with EVT_XXX as follows:
-  //   BUTTON_XXX equals (1 << EVT_XXX) equals (1 << SIG_XXX)
+  //   BUTTON_XXX equals (1 << EVT_XXX) equals (1 << MSG_XXX)
   
   enum { EVT_SELECT, EVT_RIGHT, EVT_DOWN, EVT_UP, EVT_LEFT, ELSE } EVENTS;
   enum { MSG_SELECT, MSG_RIGHT, MSG_DOWN, MSG_UP, MSG_LEFT, MSG_END } MESSAGES;
