@@ -9,11 +9,11 @@
 
 typedef void (*presscb_t)( int press );
 
-class ATM_CLASSNAME : public Machine {
+class Automaton_Adafruit_RGBLCDShield_Buttons : public Machine {
 
   public:
   // Constructor, leave this unchanged
-  ATM_CLASSNAME( void ) : Machine() { class_label = "LCBTN"; };
+  Automaton_Adafruit_RGBLCDShield_Buttons( void ) : Machine() { class_label = "LCBTN"; };
   
   // Your state, event & action names, customize this 
   enum { IDLE, PRESS, REPEAT } STATES; // In state table row order
@@ -27,10 +27,10 @@ class ATM_CLASSNAME : public Machine {
   Machine * display;
   
   // Prototypes for your methods, minimum: begin() & io()
-  ATM_CLASSNAME & begin();
-  ATM_CLASSNAME & begin( presscb_t event_callback );
-  ATM_CLASSNAME & begin( const char label[] );
-  ATM_CLASSNAME & begin( Machine & machine );
+  Automaton_Adafruit_RGBLCDShield_Buttons & begin();
+  Automaton_Adafruit_RGBLCDShield_Buttons & begin( presscb_t event_callback );
+  Automaton_Adafruit_RGBLCDShield_Buttons & begin( const char label[] );
+  Automaton_Adafruit_RGBLCDShield_Buttons & begin( Machine & machine );
   int event( int id );
   void action( int id );
 };

@@ -1,7 +1,7 @@
 #include <Automaton.h>
 #include "Automaton_Adafruit_RGBLCDShield_Buttons.h"
 
-ATM_CLASSNAME & ATM_CLASSNAME::begin()
+Automaton_Adafruit_RGBLCDShield_Buttons & Automaton_Adafruit_RGBLCDShield_Buttons::begin()
 { 
   const static state_t state_table[] PROGMEM = {
   /*            ON_ENTER     ON_LOOP  ON_EXIT  EVT_SAMPLE  EVT_BTN   EVT_RLS  EVT_DELAY  EVT_REPEAT  ELSE */
@@ -9,7 +9,7 @@ ATM_CLASSNAME & ATM_CLASSNAME::begin()
   /* PRESS  */ ACT_PRESS,  ACT_CHECK,      -1,         -1,      -1,     IDLE,    REPEAT,         -1,   -1, 
   /* REPEAT */ ACT_PRESS,  ACT_CHECK,      -1,         -1,      -1,     IDLE,        -1,     REPEAT,   -1, 
   };
-  table( state_table, ELSE );
+  Machine::begin( state_table, ELSE );
   lcd = Adafruit_RGBLCDShield();
   lcd.begin(16, 2);
   set(  timer_delay, 500 );
@@ -18,28 +18,28 @@ ATM_CLASSNAME & ATM_CLASSNAME::begin()
   return *this;
 }
 
-ATM_CLASSNAME & ATM_CLASSNAME::begin( presscb_t event_callback ) 
+Automaton_Adafruit_RGBLCDShield_Buttons & Automaton_Adafruit_RGBLCDShield_Buttons::begin( presscb_t event_callback ) 
 {
   callback = event_callback;
-  begin();
+  this->begin();
   return *this;
 }
 
-ATM_CLASSNAME & ATM_CLASSNAME::begin( const char label[] )
+Automaton_Adafruit_RGBLCDShield_Buttons & Automaton_Adafruit_RGBLCDShield_Buttons::begin( const char label[] )
 {
   display = factory->find( label );
-  begin();
+  this->begin();
   return *this;
 }
 
-ATM_CLASSNAME & ATM_CLASSNAME::begin( Machine & machine )
+Automaton_Adafruit_RGBLCDShield_Buttons & Automaton_Adafruit_RGBLCDShield_Buttons::begin( Machine & machine )
 {
   display = &machine;
-  begin();
+  this->begin();
   return *this;
 }
 
-int ATM_CLASSNAME::event( int id ) 
+int Automaton_Adafruit_RGBLCDShield_Buttons::event( int id ) 
 {
   switch ( id ) {
 	  case EVT_SAMPLE :
@@ -56,14 +56,14 @@ int ATM_CLASSNAME::event( int id )
   return 0;
 }
 
-void ATM_CLASSNAME::action( int id ) 
+void Automaton_Adafruit_RGBLCDShield_Buttons::action( int id ) 
 {
   switch ( id ) {
 	  case ACT_CHECK :
 		lcd_buttons = lcd.readButtons();
 		return;
 	  case ACT_PRESS :
-        if ( display ) display->signalMap( lcd_buttons );
+        if ( display ) display->msgMap( lcd_buttons );
 		if ( callback ) (*callback)( lcd_buttons );
 		return;
   }

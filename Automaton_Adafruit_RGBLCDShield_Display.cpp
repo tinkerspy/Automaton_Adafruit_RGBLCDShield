@@ -1,7 +1,7 @@
 #include <Automaton.h>
 #include "Automaton_Adafruit_RGBLCDShield_Display.h"
 
-ATM_CLASSNAME & ATM_CLASSNAME::menu( const char def[], int act_start, int act_end, int offset, int cnt )
+Automaton_Adafruit_RGBLCDShield_Display & Automaton_Adafruit_RGBLCDShield_Display::menu( const char def[], int act_start, int act_end, int offset, int cnt )
 { 
   menu_opts = def;
   lcd = Adafruit_RGBLCDShield();
@@ -10,18 +10,19 @@ ATM_CLASSNAME & ATM_CLASSNAME::menu( const char def[], int act_start, int act_en
   end_action = act_end;
   top_offset = offset;
   top_cnt = cnt;
+  Machine::begin( state_table, ELSE, messages, MSG_END );
+ // msg_queue = messages;
+ // msg_max = MSG_END;
   return *this;
 }
 
-// void ATM_CLASSNAME::menu_action( int id ) { };
-
-int ATM_CLASSNAME::event( int id ) 
+int Automaton_Adafruit_RGBLCDShield_Display::event( int id ) 
 {
-  return signalRead( id ); // Only possible because EVT_XXX == SIG_XXX (see .h)
+  return id < 5 ? msgRead( id ) : 0; // Only possible because EVT_XXX == SIG_XXX (see .h)
 }
 
 // Double buffering: write 'max' changes from the 'soll' buffer to both the lcd and the 'ist' buffer
-int ATM_CLASSNAME::updateDisplay( int max_updates ) 
+int Automaton_Adafruit_RGBLCDShield_Display::updateDisplay( int max_updates ) 
 {
 	uint8_t updates = 0;
 	for ( uint8_t y = 0; y < 2; y++ ) {
@@ -37,19 +38,19 @@ int ATM_CLASSNAME::updateDisplay( int max_updates )
 	return updates;
 }
 
-int ATM_CLASSNAME::updateDisplay( void ) 
+int Automaton_Adafruit_RGBLCDShield_Display::updateDisplay( void ) 
 {
 	return updateDisplay( 32 );
 }
 
-void ATM_CLASSNAME::printXY( int x, int y, const char s[] ) 
+void Automaton_Adafruit_RGBLCDShield_Display::printXY( int x, int y, const char s[] ) 
 {	
 	for ( uint8_t i = 0; i < strlen( s ); i++ ) {
 		soll[y][x++] = s[i];
 	}
 }
 
-void ATM_CLASSNAME::action( int id ) 
+void Automaton_Adafruit_RGBLCDShield_Display::action( int id ) 
 {	
   if ( id >= start_action && id <= end_action ) {
 	int parent = read_state( state_table + ( current * width ) + ATM_ON_EXIT + EVT_LEFT + 1 );
@@ -62,7 +63,7 @@ void ATM_CLASSNAME::action( int id )
 	  }
 	}
   }
-  if ( id == ATM_ON_SWITCH ) signalClear(); 
+  if ( id == ATM_ON_SWITCH ) msgClear(); 
   menu_action( id );  
   return;
 }

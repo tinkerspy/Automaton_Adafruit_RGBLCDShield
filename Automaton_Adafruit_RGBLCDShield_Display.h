@@ -11,18 +11,19 @@
 
 typedef char display_t[2][16];
 
-class ATM_CLASSNAME : public Machine {
+class Automaton_Adafruit_RGBLCDShield_Display : public Machine {
 
   public:
-  ATM_CLASSNAME( void ) : Machine() { class_label = "LCDIS"; };
+  Automaton_Adafruit_RGBLCDShield_Display( void ) : Machine() { class_label = "LCDIS"; };
   
   // Event and signal names ( EVT_XXX == SIG_XXX allows for a very simple one line event() handler! )
   // Also matches the Adafruit button bitmap, so that BUTTON_XXX lines up with EVT_XXX as follows:
   //   BUTTON_XXX equals (1 << EVT_XXX) equals (1 << SIG_XXX)
   
   enum { EVT_SELECT, EVT_RIGHT, EVT_DOWN, EVT_UP, EVT_LEFT, ELSE } EVENTS;
-  enum { SIG_SELECT, SIG_RIGHT, SIG_DOWN, SIG_UP, SIG_LEFT } SIGNALS;
-
+  enum { MSG_SELECT, MSG_RIGHT, MSG_DOWN, MSG_UP, MSG_LEFT, MSG_END } MESSAGES;
+  atm_msg_t messages[MSG_END];
+  
   Adafruit_RGBLCDShield lcd;
   const char *menu_opts;
   int start_action, end_action, top_offset, top_cnt;
@@ -30,7 +31,7 @@ class ATM_CLASSNAME : public Machine {
 	{ ' ', ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ' },
     { ' ', ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ' } };
  
-  ATM_CLASSNAME & menu( const char def[], int act_start, int act_end, int top_offset, int top_cnt );
+  Automaton_Adafruit_RGBLCDShield_Display & menu( const char def[], int act_start, int act_end, int top_offset, int top_cnt );
   int event( int id );
   void action( int id );
   void printXY( int x, int y, const char s[] );

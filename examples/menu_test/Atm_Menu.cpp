@@ -27,7 +27,7 @@ ATM_CLASSNAME & ATM_CLASSNAME::begin( void )
     /* OPT311 */     ACT311,         -1,      -1,         -1,        -1,       -1,       -1,        -1,  OPT31,
     /* OPT411 */     ACT411,         -1,      -1,         -1,        -1,       -1,       -1,        -1,  OPT41,
     };
-    table( state_table, ELSE );  
+    Machine::begin( state_table, ELSE );  
     const static char menu_definition[] PROGMEM = 
     /*            1234567890123456 */
     /* ACT00 */  "00 Main menu    "
