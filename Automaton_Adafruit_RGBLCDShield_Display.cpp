@@ -10,7 +10,8 @@ Automaton_Adafruit_RGBLCDShield_Display & Automaton_Adafruit_RGBLCDShield_Displa
   end_action = act_end;
   top_offset = offset;
   top_cnt = cnt;
-  Machine::begin( state_table, ELSE, messages, MSG_END );
+  Machine::begin( state_table, ELSE );
+  Machine::msgQueue( messages, MSG_END );
   return *this;
 }
 
@@ -51,7 +52,7 @@ void Automaton_Adafruit_RGBLCDShield_Display::printXY( int x, int y, const char 
 void Automaton_Adafruit_RGBLCDShield_Display::action( int id ) 
 {	
   if ( id >= start_action && id <= end_action ) {
-	int parent = read_state( state_table + ( current * width ) + ATM_ON_EXIT + EVT_LEFT + 1 );
+	int parent = read_state( state_table + ( current * state_width ) + ATM_ON_EXIT + EVT_LEFT + 1 );
 	if ( parent >= 0 ) {
 	  for ( int x = top_offset; x < top_offset + top_cnt; x++ ) {
 		soll[0][x - top_offset] = read_menu( menu_opts + (parent * 16 ) + x );
