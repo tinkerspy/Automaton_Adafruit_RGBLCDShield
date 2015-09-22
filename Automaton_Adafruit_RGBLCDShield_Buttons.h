@@ -23,7 +23,7 @@ class Automaton_Adafruit_RGBLCDShield_Buttons : public Machine {
   Adafruit_RGBLCDShield lcd;
   uint8_t lcd_buttons;
   void (*callback)( int press ) = 0;
-  atm_milli_timer timer_delay, timer_repeat, timer_sample;
+  atm_timer_millis timer_delay, timer_repeat, timer_sample;
   Machine * display;
   
   // Prototypes for your methods, minimum: begin() & io()

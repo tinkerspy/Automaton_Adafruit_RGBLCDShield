@@ -12,9 +12,9 @@ Automaton_Adafruit_RGBLCDShield_Buttons & Automaton_Adafruit_RGBLCDShield_Button
   Machine::begin( state_table, ELSE );
   lcd = Adafruit_RGBLCDShield();
   lcd.begin(16, 2);
-  set(  timer_delay, 500 );
-  set( timer_repeat, 100 );  
-  set( timer_sample,  50 );
+  timer_delay.begin( this, 500 );
+  timer_repeat.begin( this, 100 );  
+  timer_sample.begin( this,  50 );
   return *this;
 }
 
@@ -43,15 +43,15 @@ int Automaton_Adafruit_RGBLCDShield_Buttons::event( int id )
 {
   switch ( id ) {
 	  case EVT_SAMPLE :
-		return expired( timer_sample );
+		return timer_sample.expired();
 	  case EVT_BTN :
 		return lcd_buttons > 0;
 	  case EVT_RLS :
 		return lcd_buttons == 0;
 	  case EVT_DELAY :
-		return expired( timer_delay );
+		return timer_delay.expired();
 	  case EVT_REPEAT :
-		return expired( timer_repeat );
+		return timer_repeat.expired();
   }
   return 0;
 }
