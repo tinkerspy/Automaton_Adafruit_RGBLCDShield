@@ -11,7 +11,7 @@ Automaton_Adafruit_RGBLCDShield_Display & Automaton_Adafruit_RGBLCDShield_Displa
   top_offset = offset;
   top_cnt = cnt;
   Machine::begin( state_table, ELSE );
-  Machine::msgQueue( messages, MSG_END );
+  Machine::msgQueue( messages, MSG_END, 1 );
   return *this;
 }
 
@@ -62,7 +62,6 @@ void Automaton_Adafruit_RGBLCDShield_Display::action( int id )
 	  }
 	}
   }
-  if ( id == ATM_ON_SWITCH ) msgClear(); 
   menu_action( id );  
   return;
 }
