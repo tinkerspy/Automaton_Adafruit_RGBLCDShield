@@ -38,6 +38,7 @@ class Automaton_Adafruit_RGBLCDShield_Display : public Machine {
   int updateDisplay( int max_updates );
   int updateDisplay( void );
   virtual void menu_action( int id ) = 0; // Pure virtual method -> makes this an abstract class
+  Machine & msgMap( uint32_t map );
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include <Automaton.h>
 #include "Automaton_Adafruit_RGBLCDShield_Buttons.h"
+#include "Automaton_Adafruit_RGBLCDShield_Display.h"
 
 Automaton_Adafruit_RGBLCDShield_Buttons & Automaton_Adafruit_RGBLCDShield_Buttons::begin()
 { 
@@ -63,9 +64,15 @@ void Automaton_Adafruit_RGBLCDShield_Buttons::action( int id )
 		lcd_buttons = lcd.readButtons();
 		return;
 	  case ACT_PRESS :
-        if ( display ) display->msgMap( lcd_buttons );
-		if ( callback ) (*callback)( lcd_buttons );
-		return;
+		if ( display ) {
+                   if ( lcd_buttons &  1 ) display->trigger( Automaton_Adafruit_RGBLCDShield_Display::EVT_SELECT );
+                   if ( lcd_buttons &  2 ) display->trigger( Automaton_Adafruit_RGBLCDShield_Display::EVT_RIGHT  );
+                   if ( lcd_buttons &  4 ) display->trigger( Automaton_Adafruit_RGBLCDShield_Display::EVT_DOWN   );
+                   if ( lcd_buttons &  8 ) display->trigger( Automaton_Adafruit_RGBLCDShield_Display::EVT_UP     );
+                   if ( lcd_buttons & 16 ) display->trigger( Automaton_Adafruit_RGBLCDShield_Display::EVT_LEFT   );
+		}
+	        if ( callback ) (*callback)( lcd_buttons );
+	        return;
   }
 }
 
