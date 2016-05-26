@@ -2,6 +2,7 @@
 #include "Atm_Menu.h"
 
 extern Atm_led led1, led2, led3;
+extern int pin1, pin2, pin3;
 
 Atm_Menu & Atm_Menu::begin( void )
 { 
@@ -55,15 +56,15 @@ void Atm_Menu::menu_action( int id )
             if ( updateDisplay( 1 ) == 0 ) sleep( 1 );
             return;
         case ACT11L :
-            if ( pin.change( 3 ) ) printXY(  5, 1, digitalRead( 3 ) ? "+" : " " );
-            if ( pin.change( 4 ) ) printXY(  9, 1, digitalRead( 4 ) ? "+" : " " );
-            if ( pin.change( 5 ) ) printXY( 13, 1, digitalRead( 5 ) ? "+" : " " );
+            if ( pin.change( pin1 ) ) printXY(  5, 1, digitalRead( pin1 ) ? "+" : " " ); // Dependency on pin use!!!
+            if ( pin.change( pin2 ) ) printXY(  9, 1, digitalRead( pin2 ) ? "+" : " " );
+            if ( pin.change( pin3 ) ) printXY( 13, 1, digitalRead( pin3 ) ? "+" : " " );
             updateDisplay( 1 );
             return;
         case ACT11 : 
-            printXY(  5, 1, digitalRead( 3 ) ? "+" : " " );
-            printXY(  9, 1, digitalRead( 4 ) ? "+" : " " );
-            printXY( 13, 1, digitalRead( 5 ) ? "+" : " " );
+            printXY(  5, 1, digitalRead( pin1 ) ? "+" : " " );
+            printXY(  9, 1, digitalRead( pin2 ) ? "+" : " " );
+            printXY( 13, 1, digitalRead( pin3 ) ? "+" : " " );
             return;
         case ACT21 : printXY( 8, 1, led1.state() == led1.IDLE ? "Off" : "On" ); return;
         case ACT31 : printXY( 8, 1, led2.state() == led2.IDLE ? "Off" : "On" ); return;

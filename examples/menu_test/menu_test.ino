@@ -5,24 +5,35 @@
 #include <Wire.h>
 #include <Adafruit_RGBLCDShield.h>
 
-Atm_led led1, led2, led3, led4; 
+Atm_led led1, led2, led3; 
 Atm_Menu lcd_display;
 Automaton_Adafruit_RGBLCDShield_Buttons lcd_buttons;
 Appliance app; 
 
+int pin1 = 4;
+int pin2 = 5;
+int pin3 = 6;
+
 void setup() {
   
-  // Initialize the machines
-  led1.begin( 3 ).blink( 500 ).trigger( led4.EVT_BLINK );
-  led2.begin( 4 ).blink( 500 ).trigger( led4.EVT_BLINK );
-  led3.begin( 5 ).blink( 500 ).trigger( led4.EVT_BLINK );
-  led4.begin( 6 ).blink( 0 ).pause( 0 ).fade( 0 ).trigger( led4.EVT_BLINK );
-  lcd_display.begin( );
-  lcd_buttons.begin( lcd_display ); // Link the buttons to the display
+  app.component( 
+    led1.begin( pin1 )
+      .blink( 500 )
+      .trigger( led1.EVT_BLINK ) 
+  );
+  app.component( 
+    led2.begin( pin2 )
+      .blink( 500 )
+      .trigger( led2.EVT_BLINK )
+  );
+  app.component( 
+    led3.begin( pin3 )
+      .blink( 500 )
+      .trigger( led3.EVT_BLINK )
+  );
+  app.component( lcd_display.begin( ) );
+  app.component( lcd_buttons.begin( lcd_display ) ); // Link the buttons to the display
 
-  // Add the initialized machines to the factory
-  app.component( led4 ).component( led3 ).component( led2 ).component( led1 );
-  app.component( lcd_display ).component( lcd_buttons );
 }
 
 void loop() {
