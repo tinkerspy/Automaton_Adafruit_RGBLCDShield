@@ -11,13 +11,12 @@ Automaton_Adafruit_RGBLCDShield_Display & Automaton_Adafruit_RGBLCDShield_Displa
   top_offset = offset;
   top_cnt = cnt;
   Machine::begin( state_table, ELSE );
-  Machine::msgQueue( messages, MSG_END, 1 );
   return *this;
 }
 
 int Automaton_Adafruit_RGBLCDShield_Display::event( int id ) 
 {
-  return msgRead( id ); // Only possible because EVT_XXX == MSG_XXX (see .h)
+  return 0;
 }
 
 // Double buffering: write 'max' changes from the 'soll' buffer to both the lcd and the 'ist' buffer

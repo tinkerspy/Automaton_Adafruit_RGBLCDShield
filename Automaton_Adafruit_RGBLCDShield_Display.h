@@ -1,11 +1,7 @@
-#ifndef Automaton_Adafruit_RGBLCDShield_Display_h
-#define Automaton_Adafruit_RGBLCDShield_Display_h
+#pragma once
 
 #include <Automaton.h>
 #include <Adafruit_RGBLCDShield.h>
-
-#undef ATM_CLASSNAME
-#define ATM_CLASSNAME Automaton_Adafruit_RGBLCDShield_Display
 
 #define read_menu(addr) (char)pgm_read_byte_near(addr)
 
@@ -14,7 +10,7 @@ typedef char display_t[2][16];
 class Automaton_Adafruit_RGBLCDShield_Display : public Machine {
 
   public:
-  Automaton_Adafruit_RGBLCDShield_Display( void ) : Machine() { class_label = "LCDIS"; };
+  Automaton_Adafruit_RGBLCDShield_Display( void ) : Machine() {};
   
   // Event and message names ( EVT_XXX == MSG_XXX allows for a very simple one line event() handler! )
   // Also matches the Adafruit button bitmap, so that BUTTON_XXX lines up with EVT_XXX as follows:
@@ -22,7 +18,6 @@ class Automaton_Adafruit_RGBLCDShield_Display : public Machine {
   
   enum { EVT_SELECT, EVT_RIGHT, EVT_DOWN, EVT_UP, EVT_LEFT, ELSE } EVENTS;
   enum { MSG_SELECT, MSG_RIGHT, MSG_DOWN, MSG_UP, MSG_LEFT, MSG_END } MESSAGES;
-  atm_msg_t messages[MSG_END];
   
   Adafruit_RGBLCDShield lcd;
   const char *menu_opts;
@@ -41,4 +36,4 @@ class Automaton_Adafruit_RGBLCDShield_Display : public Machine {
   Machine & msgMap( uint32_t map );
 };
 
-#endif
+

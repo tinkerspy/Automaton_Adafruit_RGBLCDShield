@@ -1,11 +1,7 @@
-#ifndef Automaton_Adafruit_RGBLCDShield_Buttons_h
-#define Automaton_Adafruit_RGBLCDShield_Buttons_h
+#pragma once
 
 #include <Automaton.h>
 #include <Adafruit_RGBLCDShield.h>
-
-#undef ATM_CLASSNAME
-#define ATM_CLASSNAME Automaton_Adafruit_RGBLCDShield_Buttons
 
 typedef void (*presscb_t)( int press );
 
@@ -13,7 +9,7 @@ class Automaton_Adafruit_RGBLCDShield_Buttons : public Machine {
 
   public:
   // Constructor, leave this unchanged
-  Automaton_Adafruit_RGBLCDShield_Buttons( void ) : Machine() { class_label = "LCBTN"; };
+  Automaton_Adafruit_RGBLCDShield_Buttons( void ) : Machine() {};
   
   // Your state, event & action names, customize this 
   enum { IDLE, PRESS, REPEAT } STATES; // In state table row order
@@ -29,10 +25,8 @@ class Automaton_Adafruit_RGBLCDShield_Buttons : public Machine {
   // Prototypes for your methods, minimum: begin() & io()
   Automaton_Adafruit_RGBLCDShield_Buttons & begin();
   Automaton_Adafruit_RGBLCDShield_Buttons & begin( presscb_t event_callback );
-  Automaton_Adafruit_RGBLCDShield_Buttons & begin( const char label[] );
   Automaton_Adafruit_RGBLCDShield_Buttons & begin( Machine & machine );
   int event( int id );
   void action( int id );
 };
-	
-#endif
+
