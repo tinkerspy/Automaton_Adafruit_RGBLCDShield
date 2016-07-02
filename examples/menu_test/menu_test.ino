@@ -17,14 +17,15 @@ void setup() {
   
   led1.begin( pin1 )
     .blink( 500 )
-    .trigger( led1.EVT_BLINK );
+    .start();
   led2.begin( pin2 )
     .blink( 500 )
-    .trigger( led2.EVT_BLINK );
+    .start();
   led3.begin( pin3 )
     .blink( 500 )
-    .trigger( led3.EVT_BLINK );
-  lcd_display.begin( );
+    .start();
+
+  lcd_display.begin(;
   lcd_buttons.begin( lcd_display ); // Link the buttons to the display
 
 }
