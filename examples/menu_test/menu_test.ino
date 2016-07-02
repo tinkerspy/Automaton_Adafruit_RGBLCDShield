@@ -16,13 +16,13 @@ int pin3 = 6;
 void setup() {
   
   led1.begin( pin1 )
-    .blink( 500 )
+    .blink( 500, 500 )
     .start();
   led2.begin( pin2 )
-    .blink( 500 )
+    .blink( 500, 500 )
     .start();
   led3.begin( pin3 )
-    .blink( 500 )
+    .blink( 500, 500 )
     .start();
 
   lcd_display.begin(;
